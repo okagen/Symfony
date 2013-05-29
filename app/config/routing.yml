@@ -1,0 +1,5 @@
+my_to_do_list:
+    resource: "@MyToDoListBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
