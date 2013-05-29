@@ -1,4 +1,8 @@
-<h1>{{ post.title }}</h1>
+{% extends 'MyToDoListBundle::base.html.twig' %}
+
+{% block page_title %}{{ post.title }}{% endblock %}
+
+{% block content %}
 
 <p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
 
@@ -9,3 +13,5 @@
 <p><small>Deadline is {{ post.deadline|nl2br }}</p>
 
 <p><a href="{{ path('todo_index') }}">一覧に戻る</a></p>
+
+{% endblock content %}

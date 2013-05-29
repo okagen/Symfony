@@ -1,4 +1,9 @@
-<h1>My To Do Items</h1>
+{% extends 'MyToDoListBundle::base.html.twig' %}
+
+{% block page_title 'Items' %}
+
+{% block content %}
+
 <table class="table">
   <thead>
     <tr>
@@ -26,3 +31,5 @@
     {% endfor %}
   </tbody>
 </table>
+
+{% endblock content %}
