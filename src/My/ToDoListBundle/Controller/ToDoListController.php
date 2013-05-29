@@ -23,4 +23,19 @@ class ToDoListController extends Controller
 
         return array('posts' => $posts);
     }
+
+
+    /**
+     * @Route("/{id}/detail")
+     */
+    public function detailAction($id)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $post = $em->getRepository('MyToDoListBundle:Post')->find($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException('The note does not exist');
+        }
+        return array('post' => $post);
+    }
 }
