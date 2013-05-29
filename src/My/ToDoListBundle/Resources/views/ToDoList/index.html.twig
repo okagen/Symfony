@@ -14,8 +14,10 @@
     <tr>
         <td>{{ post.id }}</td>
         <td>{{ post.createdAt|date('Y/m/d H:i') }}</td>
-        <td><a href="">{{ post.title }}</a></td>
-        <td><a href="">{{ post.deadline }}</a></td>
+
+        <td><a href="{{ path('todo_detail', {'id': post.id}) }}">{{ post.title }}</a></td>
+
+        <td>{{ post.deadline }}</td>
     </tr>
     {% else %}
     <tr>

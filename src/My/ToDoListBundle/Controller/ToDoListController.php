@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ToDoListController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="todo_index")
      */
     public function indexAction()
     {
@@ -24,9 +24,8 @@ class ToDoListController extends Controller
         return array('posts' => $posts);
     }
 
-
     /**
-     * @Route("/{id}/detail")
+     * @Route("/{id}/detail", name="todo_detail")
      */
     public function detailAction($id)
     {
