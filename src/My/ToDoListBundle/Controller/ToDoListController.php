@@ -72,4 +72,22 @@ class ToDoListController extends Controller
          );
     }
 
+    /**
+      * @Route("/{id}/delete", name="todo_delete")
+      */
+     function deleteAction($id)
+     {
+         $em = $this->getDoctrine()->getEntityManager();
+         $post = $em->getRepository('MyToDoListBundle:Post')->find($id);
+         if (!$post) {
+             throw $this->createNotFoundException('The item does not exist');
+         }
+         // 削除
+         $em->remove($post);
+         $em->flush();
+
+         return $this->redirect($this->generateUrl('todo_index'));
+      }
+
+
 }
