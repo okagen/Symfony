@@ -1,0 +1,13 @@
+{% extends 'MyToDoListBundle::base.html.twig' %}
+
+{% block page_title 'Create new task!!!' %}
+
+{% block content %}
+
+<form action="{{ path('todo_new') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">new</button>
+    <a href="{{ path('todo_index') }}">Return to the list.</a>
+</form>
+
+{% endblock content %}
