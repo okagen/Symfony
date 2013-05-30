@@ -1,29 +1,43 @@
 <!doctype html>
-<html>
+<html lang="ja">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
+  {% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('bundles/mytodolist/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bundles/mytodolist/bootstrap/css/bootstrap-responsive.min.css') }}">
+
+  {% endblock stylesheets %}
+
   <title>{% block title %}{{ block('page_title') }} - My to do list{% endblock title %}</title>
 </head>
-<body>
-  <div>
-    <div>
-      <div>
+<body style="padding-top:40px">
+  <div class="container">
+    <div class="row">
+      <div class="span4">
         <h1>My to do list.</h1>
       </div>
-
-      <div>
-        <h2>
-          {% block page_title %}{% endblock page_title %}
-        </h2>
-        {% block content %}{% endblock content %}
+      <div class="span8">
+        <h2>on symfony2</h2>
       </div>
     </div>
 
-    <footer>
-      <p>*** テンプレート(base.html)を継承 ***</p>
+    <div class="row">
+      <div class="span12" style="border-bottom: 1px solid #000">
+        <h3>
+          {% block page_title %}{% endblock page_title %}
+        </h3>
+      </div>
+    </div>
+
+    <div class="row">
+        {% block content %}{% endblock content %}
+    </div>
+
+    <footer style="background-color:#F5F5F5">
+        <p class="muted credit" style="text-align: right">*** テンプレート(base.html)を継承 ***</p>
     </footer>
   </div>
 

@@ -1,35 +1,37 @@
 {% extends 'MyToDoListBundle::base.html.twig' %}
 
-{% block page_title 'Items' %}
+{% block page_title 'Those items must be done within the deadlines...' %}
 
 {% block content %}
 
-<table class="table">
-  <thead>
-    <tr>
-        <td>ID</td>
-        <td>登録日</td>
-        <td>タイトル</td>
-        <td>締切日</td>
-    </tr>
-  </thead>
-  <tbody>
-    {# posts配列をループして、投稿記事の情報を表示 #}
-    {% for post in posts %}
-    <tr>
-        <td>{{ post.id }}</td>
-        <td>{{ post.createdAt|date('Y/m/d H:i') }}</td>
+<div class="span12">
+    <table class="table table-condenced table-hover">
+      <thead> 
+        <tr class="info">
+            <td>ID</td>
+            <td>登録日</td>
+            <td>タイトル</td>
+            <td>締切日</td>
+        </tr>
+      </thead>
+      <tbody>
+        {# posts配列をループして、投稿記事の情報を表示 #}
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.createdAt|date('Y/m/d H:i') }}</td>
 
-        <td><a href="{{ path('todo_detail', {'id': post.id}) }}">{{ post.title }}</a></td>
+            <td><a href="{{ path('todo_detail', {'id': post.id}) }}">{{ post.title }}</a></td>
 
-        <td>{{ post.deadline }}</td>
-    </tr>
-    {% else %}
-    <tr>
-        <td colspan="3">No Posts</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+            <td>{{ post.deadline }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No Posts</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
 
 {% endblock content %}

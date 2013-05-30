@@ -1,17 +1,25 @@
-{% extends 'MyToDoListBundle::base.html.twig' %}
+{% extends 'MyToDoListBundle::base.html.twig' %} 
 
-{% block page_title %}{{ post.title }}{% endblock %}
+{% block page_title %}
+	{{ post.title }}
+{% endblock %}
 
 {% block content %}
+	<div class="span1">
+		<h3>#{{ post.id|nl2br }}</h3>
+		<p><a href="{{ path('todo_index') }}">一覧に戻る</a></p>
+	</div>
+	<div class="span7"  >
+		<div style="background-color:#F5F5F5">
+			<h3>{{ post.note|nl2br }}</h3>
+		</div>
+	</div>
 
-<p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
-
-<p><small>Updated: {{ post.updatedAt|date('Y/m/d H:i') }}</small></p>
-
-<p>{{ post.note|nl2br }}</p>
-
-<p><small>Deadline is {{ post.deadline|nl2br }}</p>
-
-<p><a href="{{ path('todo_index') }}">一覧に戻る</a></p>
+	<div class="span4">
+		<h3>Deadline is {{ post.deadline|nl2br }}</h3>	
+		<p>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
+		<p>Updated: {{ post.updatedAt|date('Y/m/d H:i') }}</small></p>
+		
+	</div>
 
 {% endblock content %}
