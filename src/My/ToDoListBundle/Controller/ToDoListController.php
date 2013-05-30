@@ -45,8 +45,10 @@ class ToDoListController extends Controller
      */
     public function newAction(Request $request)
     {
+        $post = $post = new Post();
+        
         //フォームを作るメソッド createFormBuilder
-        $form = $this->createFormBuilder(new Post())
+        $form = $this->createFormBuilder($post)
             ->add('title')
             ->add('note')
             ->add('deadline')
@@ -68,6 +70,7 @@ class ToDoListController extends Controller
         }
 
         return array(
+            'post' => $post,
             'form' => $form->createView(),
          );
     }
@@ -89,5 +92,39 @@ class ToDoListController extends Controller
          return $this->redirect($this->generateUrl('todo_index'));
       }
 
+    /**
+    * @Route("/{id}/edit", name="todo_edit")
+    */
+    public function editAction(Request $request, $id)
+    {
+    // DBから取得
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('MyToDoListBundle:Post')->find($id);
+        if (!$post) {
+            throw $this->createNotFoundException('The item does not exist');
+        }
+        // フォームの組立
+        $form = $this->createFormBuilder($post)
+        ->add('title')
+        ->add('note')
+        ->add('deadline')
+        ->getForm();
+
+        // バリデーション
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+            if ($form->isValid()) {
+            // 更新されたエンティティをデータベースに保存
+                $post = $form->getData();
+                $post->setUpdatedAt(new \DateTime());
+                $em->flush();
+                return $this->redirect($this->generateUrl('todo_index'));
+            }
+        }
+        return array(
+            'post' => $post,
+            'form' => $form->createView(),
+            );
+    }
 
 }

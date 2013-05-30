@@ -4,10 +4,14 @@
 
 {% block content %}
 
-<form action="{{ path('todo_new') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ post.id ? path('todo_edit', {'id': post.id}) : path('todo_new') }}" method="post" {{ form_enctype(form) }}>
+
     {{ form_widget(form) }}
-    <button class="btn btn-primary">new</button>
-    <a href="{{ path('todo_index') }}">Return to the list.</a>
+
+    {% if post.id %}
+        <button class="btn btn-info">Edit</button>
+    {% else %}
+        <button class="btn btn-primary">New{% endif %}</button>
 </form>
 
 {% endblock content %}

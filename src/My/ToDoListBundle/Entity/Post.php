@@ -46,7 +46,6 @@ class Post
      *
      * @ORM\Column(name="deadline", type="text")
      * @Assert\NotBlank()
-     * @Assert\Length(min="10")
      */
     private $deadline;
 
