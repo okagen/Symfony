@@ -1,174 +1,77 @@
-Symfony Standard Edition
+Symfony2の勉強の為のrepository
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+2013.05.25渋谷のVOYAGE GROUP AJITOで行われた[symfony2勉強会][1]に参加させていただきました。これまでWebアプリの開発をしたことが無く、PHPはおろかsymfonyの知識は殆どなかった為、後半のワークショップでは何度も質問をしながら（親切に指導していただきありがとうございました、そのおかげで）なんとか最後までたどり着きましたが、終了後も頭の中の混乱は整理できず、ワークショップの復習をしようとこのrepositoryを作りました。  
+おさらいしながら節目節目でpushし、何をしたら、どのファイルがどう変わるのかの履歴を残した感じです。  
+ワークショップでは「Blog」アプリの開発というテーマでしたが、丸ごと真似すると自分が何が分かってないのか分からないだろう思い、ここでは「To Do List」アプリと若干アレンジしています。しかし、内容はほぼワークショップと同じです。(そこまではアレンジできませんでした。)  
+もしsymfonyというキーワドでこのページに辿り着かれた、私と同じように勉強中の方は、[講師であったokaponさんが作られているチュートリアル][2]を参考にされると良いと思います。そして、何をしたら、どのファイルがどの様に書き換わるのかを確認したい場合に、本repositoryの各commitを参照されてはいかがでしょうか。
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+commit:1) composerを使ってsymfony2.2.1をインストールした状態
+----------------------------------------------------
+[composer][3]を使ってsymfony2.2.1をインストールした直後の状態をpushしています。不要なファイルがたくさんあると思うので、もう少し理解が深まってから、不要なファイルを削除します。
 
-1) Installing the Standard Edition
-----------------------------------
+commit:2) バンドル(My/ToDoListBundle)を生成 
+----------------------------------------------------
+<code>php app/console generate:bundle</code>というコマンドを使ってバンドル生成後、pushました。
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+commit:3) DBへデータを登録する為のエンティティ(POSTエンティティ)を生成 
+----------------------------------------------------
+<code>php app/console generate:doctrine:entity</code>というコマンドを使ってPOSTエンティティを生成後、pushました。
 
-### Use Composer (*recommended*)
+commit:4) ToDoList画面を作成する為にコントローラとテンプレートを追加
+----------------------------------------------------
+項目一覧画面です。下記を行いpushしました。
+  1. routingを行うためcontrollerにannotationを設定
+  2. <code>@Template()</code>の参照先となるファイルを作成
 
-As Symfony uses [Composer][2] to manage its dependencies, the recommended way
-to create a new project is to use it.
+commit:5) 詳細内容表示画面を作成する為にコントローラとテンプレートを作成
+----------------------------------------------------
+各項目の詳細内容表示画面です。下記を行いpushしました。
+  1. routingを行うためcontrollerにannotationを設定
+  2. <code>@Template()</code>の参照先となるファイルを作成
 
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+commit:6) ToDoList画面の各要素と詳細内容画面をリンクさせる
+----------------------------------------------------
+<code>@Route</code>の各項目に<code>name="○○○"</code>という名前を付け、html.twig内でリンクさせる処理を追加し、pushしました。
 
-    curl -s http://getcomposer.org/installer | php
+commit:7) ベースのテンプレートを作り、ToDoList画面と詳細内容表示画面に継承する
+----------------------------------------------------
+項目一覧画面、項目詳細表示画面とで共通するheaderやfooter部分を、別のテンプレートに記述。そしてそれを、項目一覧画面、項目詳細表示画面のれぞれのに継承する処理を行い、pushしました。
 
-Then, use the `create-project` command to generate a new Symfony application:
+commit:8) bootstrapを使って見栄えを良くする
+----------------------------------------------------
+[bootstrap][4]、初めて知りました。この便利なstylesheetを使って、見栄えを良くしています。その後pushしました。
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+commit:9) 新規アイテム追加機能を追加し、入力値のバリデーションを行う
+----------------------------------------------------
+下記を行いpushしました。
+  1. 新規アイテム追加の為のcontrollerを追加
+  2. 項目一覧テンプレートに新規アイテム追加用のボタンを追加
+  3. Entity/Post.php内でバリデーションを設定
 
-Composer will install Symfony and all its dependencies under the
-`path/to/install` directory.
+commit:10) アイテムの削除機能を追加
+----------------------------------------------------
+下記を行いpushしました。
+  1. アイテムの削除の為のcontrollerを追加
+  2. 項目一覧テンプレートにアイテムの削除用のボタンを追加
 
-### Download an Archive File
+commit:11) アイテムの編集機能を追加
+----------------------------------------------------
+下記を行いpushしました。
+  1. アイテムの編集の為のcontrollerを追加
+  2. 新規作成用テンプレートに対し、新規作成の場合とアイテムの編集の場合とで表示される内容が切り替わる様に変更。
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
-Edition and unpack it somewhere under your web server root directory.
+commit:12) このmdとpdfをコミット
+----------------------------------------------------
+このReadme.mdと、symfony2_ToDoList.pdfをコミットしました。
+  * Readme.md - markdown形式のファイルは初めて書きました。このファイルです。
+  * [symfony2_ToDoList.pdf][5] - windowのPCしか持っていないので、xamppをインストールし色々と設定しています。その過程と、このrepositoryを作る際に行った作業のメモをpdfにしています。
 
-If you downloaded an archive "without vendors", you also need to install all
-the necessary dependencies. Download composer (see above) and run the
-following command:
+### 今後は、必要無さそうなファイルを削除してcommitします。
+### That's all.
 
-    php composer.phar install
-
-2) Checking your System Configuration
--------------------------------------
-
-Before starting coding, make sure that your local system is properly
-configured for Symfony.
-
-Execute the `check.php` script from the command line:
-
-    php app/check.php
-
-Access the `config.php` script from a browser:
-
-    http://localhost/path/to/symfony/app/web/config.php
-
-If you get any warnings or recommendations, fix them before moving on.
-
-3) Browsing the Demo Application
---------------------------------
-
-Congratulations! You're now ready to use Symfony.
-
-From the `config.php` page, click the "Bypass configuration and go to the
-Welcome page" link to load up your first Symfony page.
-
-You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the `config.php` page.
-
-To see a real-live Symfony page in action, access the following page:
-
-    web/app_dev.php/demo/hello/Fabien
-
-4) Getting started with Symfony
--------------------------------
-
-This distribution is meant to be the starting point for your Symfony
-applications, but it also contains some sample code that you can learn from
-and play with.
-
-A great way to start learning Symfony is via the [Quick Tour][4], which will
-take you through all the basic features of Symfony2.
-
-Once you're feeling good, you can move onto reading the official
-[Symfony2 book][5].
-
-A default bundle, `AcmeDemoBundle`, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
-
-  * delete the `src/Acme` directory;
-
-  * remove the routing entries referencing AcmeBundle in
-    `app/config/routing_dev.yml`;
-
-  * remove the AcmeBundle from the registered bundles in `app/AppKernel.php`;
-
-  * remove the `web/bundles/acmedemo` directory;
-
-  * remove the `security.providers`, `security.firewalls.login` and
-    `security.firewalls.secured_area` entries in the `security.yml` file or
-    tweak the security configuration to fit your needs.
-
-What's inside?
----------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * Twig is the only configured template engine;
-
-  * Doctrine ORM/DBAL is configured;
-
-  * Swiftmailer is configured;
-
-  * Annotations for everything are enabled.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * [**JMSSecurityExtraBundle**][13] - Allows security to be added via
-    annotations
-
-  * [**JMSDiExtraBundle**][14] - Adds more powerful dependency injection
-    features
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][15] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
-    code
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.1/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://symfony.com/download
-[4]:  http://symfony.com/doc/2.1/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.1/index.html
-[6]:  http://symfony.com/doc/2.1/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.1/book/doctrine.html
-[8]:  http://symfony.com/doc/2.1/book/templating.html
-[9]:  http://symfony.com/doc/2.1/book/security.html
-[10]: http://symfony.com/doc/2.1/cookbook/email.html
-[11]: http://symfony.com/doc/2.1/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.1/cookbook/assetic/asset_management.html
-[13]: http://jmsyst.com/bundles/JMSSecurityExtraBundle/master
-[14]: http://jmsyst.com/bundles/JMSDiExtraBundle/master
-[15]: http://symfony.com/doc/2.1/bundles/SensioGeneratorBundle/index.html
+[1]:  http://www.symfony.gr.jp/events/20130501-symfony-study8
+[2]:  https://github.com/okapon/symfony-workshop/wiki
+[3]:  http://getcomposer.org/
+[4]:  http://twitter.github.io/bootstrap/getting-started.html
+[5]:  https://github.com/okagen/Symfony/blob/master/symfony2_ToDoList.pdf

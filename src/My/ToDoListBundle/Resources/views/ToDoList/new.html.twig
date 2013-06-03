@@ -1,9 +1,10 @@
 {% extends 'MyToDoListBundle::base.html.twig' %}
 
-{% block page_title 'Create new task!!!' %}
+{% block page_title 'Create a new task!!!' %}
 
 {% block content %}
 
+<div class="span12">
 <form action="{{ post.id ? path('todo_edit', {'id': post.id}) : path('todo_new') }}" method="post" {{ form_enctype(form) }}>
 
     {{ form_widget(form) }}
@@ -13,5 +14,5 @@
     {% else %}
         <button class="btn btn-primary">New{% endif %}</button>
 </form>
-
+</div>
 {% endblock content %}
