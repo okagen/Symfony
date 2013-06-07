@@ -68,6 +68,8 @@ commit:12) このmdとpdfをコミット
   * [symfony2_ToDoList.pdf][5] - windowのPCしか持っていないので、xamppをインストールし色々と設定しています。その過程と、このrepositoryを作る際に行った作業のメモをpdfにしています。
 
 ### 今後は、必要無さそうなファイルを削除してcommitします。
+### --->やっぱり、削除するのはやめにして、このままにしておきます。
+
 ### That's all.
 
 [1]:  http://www.symfony.gr.jp/events/20130501-symfony-study8
